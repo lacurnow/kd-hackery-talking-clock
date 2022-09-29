@@ -50,4 +50,16 @@ object TalkingClockActionsV2 {
       if (hourNum >= 12) timeString.append("PM.").toString else timeString.append("AM.").toString
     }
   }
+
+  def timeToString(currentTime: HourAndMinute): String = {
+    val hourNum = currentTime.hour
+    val minNum = currentTime.minute
+    val hourWord = convertNumberToWords(if (hourNum <= 12) hourNum else hourNum % 12)
+    val minWord = convertNumberToWords(minNum)
+    val unitsMinWord = convertNumberToWords(minNum % 10)
+    val tensMinWord = convertNumberToWords(minNum - (minNum % 10))
+
+    val timeString = timeStringBuilder(hourNum, minNum, tensMinWord, unitsMinWord, minWord, hourWord)
+    timeString
+  }
 }
